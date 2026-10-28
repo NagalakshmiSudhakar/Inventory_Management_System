@@ -4,7 +4,7 @@
 ## Commit 1: Initial Project Setup and Database Connection
 
 - **Commit message:** Set up project and database connection
-- **Commit hash:435cf706233ce599e9d1941ad2d448b67c4eb608
+- **Commit hash:** 435cf706233ce599e9d1941ad2d448b67c4eb608
 - **Changes made:**
   --> Created the Inventory Management System console project.
   --> Created the Models, Services, and Repositories folders.
@@ -20,10 +20,11 @@ ________________________________________________________________________________
 ## Commit 2: Add Product Creation Functionality
 
 - **Commit message:** Add product creation functionality
-- **Commit hash:** 
+- **Commit hash:** 12d18a51898faed4365678a86d7b9211c08335db
 - **Changes made:** 
   --> Accepts product details through the console.
   --> Validates product name, code, prices, and stock quantity.
   --> Saves product details using ADO.NET.
   --> Prevents duplicate product codes.
 - **Testing:** Passed
+------------------------------------------------------------------------------------------------------------------------------------------------------------------

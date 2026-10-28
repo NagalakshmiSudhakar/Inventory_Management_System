@@ -1,4 +1,6 @@
 ﻿
+using System;
+using System.Collections.Generic;
 using InventoryManagementSystem.Models;
 using InventoryManagementSystem.Repositories;
 
@@ -9,6 +11,7 @@ namespace InventoryManagementSystem.Services
         private readonly ProductRepository productRepository =
             new ProductRepository();
 
+        // Add a new product
         public bool AddProduct(Product product)
         {
             if (string.IsNullOrWhiteSpace(product.ProductCode))
@@ -42,6 +45,12 @@ namespace InventoryManagementSystem.Services
             }
 
             return productRepository.AddProduct(product);
+        }
+
+        // Retrieve all products
+        public List<Product> GetAllProducts()
+        {
+            return productRepository.GetAllProducts();
         }
     }
 }

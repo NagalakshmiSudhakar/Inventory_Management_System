@@ -1,11 +1,13 @@
 ﻿
 using InventoryManagementSystem.Models;
 using InventoryManagementSystem.Services;
+using Microsoft.Data.SqlClient;
 
 ProductService productService = new ProductService();
 
 Console.WriteLine("===== INVENTORY MANAGEMENT SYSTEM =====");
 Console.WriteLine("1. Add Product");
+Console.WriteLine("2. View All Products");
 Console.WriteLine("0. Exit");
 Console.Write("Enter your choice: ");
 
@@ -15,6 +17,10 @@ switch (choice)
 {
     case "1":
         AddProduct();
+        break;
+
+    case "2":
+        ViewAllProducts();
         break;
 
     case "0":
@@ -81,7 +87,7 @@ void AddProduct()
     {
         Console.WriteLine(ex.Message);
     }
-    catch (Microsoft.Data.SqlClient.SqlException ex)
+    catch (SqlException ex)
     {
         if (ex.Number == 2601 || ex.Number == 2627)
         {
@@ -91,5 +97,40 @@ void AddProduct()
         {
             Console.WriteLine("Database error: " + ex.Message);
         }
+    }
+}
+
+void ViewAllProducts()
+{
+    try
+    {
+        List<Product> products = productService.GetAllProducts();
+
+        if (products.Count == 0)
+        {
+            Console.WriteLine("No products found.");
+            return;
+        }
+
+        Console.WriteLine("\n========== PRODUCT LIST ==========");
+
+        Console.WriteLine(
+            $"{"ID",-5}{"Code",-15}{"Name",-25}" +
+            $"{"Cost Price",-15}{"Selling Price",-18}{"Stock",-10}");
+
+        foreach (Product product in products)
+        {
+            Console.WriteLine(
+                $"{product.ProductId,-5}" +
+                $"{product.ProductCode,-15}" +
+                $"{product.ProductName,-25}" +
+                $"{product.CostPrice,-15:F2}" +
+                $"{product.SellingPrice,-18:F2}" +
+                $"{product.StockQuantity,-10}");
+        }
+    }
+    catch (SqlException ex)
+    {
+        Console.WriteLine("Database error: " + ex.Message);
     }
 }
